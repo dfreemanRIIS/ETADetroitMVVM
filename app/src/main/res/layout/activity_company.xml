@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="dfreemanRIIS.ETADetroit.view.RouteDetailActivity">
     <data>
-        <variable name="allCompnaies" type="String" />
+        <variable name="allCompanies" type="String" />
     </data>
 
     <LinearLayout
@@ -81,6 +81,5 @@
             android:layout_height="wrap_content"
             android:requiresFadingEdge="vertical"
             android:background="@color/light_gray"/>
-
     </LinearLayout>
 </layout>

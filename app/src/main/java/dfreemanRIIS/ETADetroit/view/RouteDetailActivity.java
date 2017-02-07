@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.databinding.ActivityRouteDetailBinding;
@@ -29,7 +26,6 @@ public class RouteDetailActivity extends Activity {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         String thisRoute = (String)getIntent().getExtras().get(EXTRA_ROUTE_NAME);
         Cursor details = databaseHelper.getRouteDetails(thisRoute);
-
 
         if(details.moveToFirst()) {
             allDetails = "Company: " + details.getString(1)

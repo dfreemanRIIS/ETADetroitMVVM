@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.adapters.TodoCursorAdapter;
@@ -46,7 +45,7 @@ public class CompanyActivity extends Activity {
 
         ActivityCompanyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_company);
         allCompanies = "TEST";
-        binding.setAllCompnaies(allCompanies);
+        binding.setAllCompanies(allCompanies);
 
         ListView mList = (ListView) findViewById(R.id.list);
         BusCompanyData busCompanyData = new BusCompanyData(this);
