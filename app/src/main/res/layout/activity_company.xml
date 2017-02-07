@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/placeImage"
+        android:contentDescription="@string/content_description"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:transitionName="tImage" />
+
+    <LinearLayout
+      android:id="@+id/llEditTextHolder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="#95000000">
+
+      <EditText
+        android:id="@+id/etTodo"
+        android:inputType="none"
+        android:hint=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+  </FrameLayout>
+
+    <LinearLayout
+      android:id="@+id/placeNameHolder"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:background="@color/primary_dark"
+      android:transitionName="tNameHolder">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white" />
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_detail"/>
+
+    </LinearLayout>
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="-10dp"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textColor="@android:color/white" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:requiresFadingEdge="vertical"
+        android:background="@color/light_gray"/>
+
+</LinearLayout>
