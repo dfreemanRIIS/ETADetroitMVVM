@@ -25,6 +25,7 @@ import dfreemanRIIS.ETADetroit.databinding.ActivityCompanyBinding;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
 import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
+import dfreemanRIIS.ETADetroit.viewModel.CompanyViewModel;
 
 public class CompanyActivity extends Activity {
 
@@ -57,8 +58,8 @@ public class CompanyActivity extends Activity {
         defaultColor = getResources().getColor(R.color.primary_dark);
         mRevealView.setVisibility(View.INVISIBLE);
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        allRoutes = databaseHelper.getAllRoutes(mBusCompany.name);
+        CompanyViewModel companyViewModel = new CompanyViewModel(this);
+        allRoutes = companyViewModel.getAllRoutes(mBusCompany.name);
         CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
 
         mList.setAdapter(listAdapter);
