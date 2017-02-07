@@ -20,9 +20,9 @@ import android.widget.TextView;
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.adapters.TodoCursorAdapter;
 import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
-import dfreemanRIIS.ETADetroit.controller.Controller;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
+import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
 public class CompanyActivity extends Activity {
 
@@ -50,10 +50,8 @@ public class CompanyActivity extends Activity {
         defaultColor = getResources().getColor(R.color.primary_dark);
         mRevealView.setVisibility(View.INVISIBLE);
 
-        //Get info from controller
-        Controller controller = new Controller();
-        allRoutes = controller.getAllRoute(mBusCompany.name, this);
-
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        allRoutes = databaseHelper.getAllRoutes(mBusCompany.name);
         CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
 
         mList.setAdapter(listAdapter);

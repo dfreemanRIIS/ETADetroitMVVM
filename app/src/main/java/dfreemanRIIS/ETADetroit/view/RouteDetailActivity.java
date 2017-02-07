@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.database.Cursor;
 
 import dfreemanRIIS.ETADetroit.R;
-import dfreemanRIIS.ETADetroit.controller.Controller;
+import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
 public class RouteDetailActivity extends Activity {
 
@@ -20,10 +20,11 @@ public class RouteDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
 
-        //Get info from controller
-        Controller controller = new Controller();
+
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
         String thisRoute = (String)getIntent().getExtras().get(EXTRA_ROUTE_NAME);
-        Cursor details = controller.getRouteDetails(thisRoute, this);
+        Cursor details = databaseHelper.getRouteDetails(thisRoute);
+
 
         if(details.moveToFirst()) {
             TextView textView1 = (TextView)findViewById(R.id.listDetails);
@@ -36,7 +37,7 @@ public class RouteDetailActivity extends Activity {
             textView1.setText(placeHolder1);
         }
 
-		Cursor stops = controller.getRouteStops(details.getString(3), this);
+		Cursor stops = databaseHelper.getRouteStops(details.getString(3));
         CursorAdapter listAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1,
                 stops,
