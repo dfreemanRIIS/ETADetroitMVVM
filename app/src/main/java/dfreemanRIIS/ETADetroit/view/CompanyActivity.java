@@ -16,10 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.adapters.TodoCursorAdapter;
 import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
+import dfreemanRIIS.ETADetroit.databinding.ActivityCompanyBinding;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
 import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
@@ -34,11 +37,16 @@ public class CompanyActivity extends Activity {
     private BusCompany mBusCompany;
     private int defaultColor;
     private Cursor allRoutes;
+    public String allCompanies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
+
+        ActivityCompanyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_company);
+        allCompanies = "TEST";
+        binding.setAllCompnaies(allCompanies);
 
         ListView mList = (ListView) findViewById(R.id.list);
         BusCompanyData busCompanyData = new BusCompanyData(this);
