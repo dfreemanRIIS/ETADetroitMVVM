@@ -7,18 +7,30 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+
 
 import dfreemanRIIS.ETADetroit.R;
+import dfreemanRIIS.ETADetroit.databinding.ActivityRouteDetailBinding;
 import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
 public class RouteDetailActivity extends Activity {
 
     public static final String EXTRA_ROUTE_NAME = "route_name";
+    public String allDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
+
+
+
+        ActivityRouteDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_route_detail);
+        allDetails = "TEST";
+        binding.setAllDetails(allDetails);
+
 
 
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
@@ -34,7 +46,7 @@ public class RouteDetailActivity extends Activity {
                     + "\nDirection 1: " + details.getString(4)
                     + "\nDirection 2: " + details.getString(5)
                     + "\nDays active: " + details.getString(6);
-            textView1.setText(placeHolder1);
+            //textView1.setText(placeHolder1);
         }
 
 		Cursor stops = databaseHelper.getRouteStops(details.getString(3));
