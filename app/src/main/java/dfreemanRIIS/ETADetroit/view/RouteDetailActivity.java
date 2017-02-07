@@ -10,7 +10,7 @@ import android.databinding.DataBindingUtil;
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.databinding.ActivityRouteDetailBinding;
-import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
+import dfreemanRIIS.ETADetroit.viewModel.RouteDetailViewModel;
 
 public class RouteDetailActivity extends Activity {
 
@@ -21,11 +21,12 @@ public class RouteDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
-
         ActivityRouteDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_route_detail);
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+
+        //New RouteDetailViewModel
+        RouteDetailViewModel routeDetailViewModel = new RouteDetailViewModel(this);
         String thisRoute = (String)getIntent().getExtras().get(EXTRA_ROUTE_NAME);
-        Cursor details = databaseHelper.getRouteDetails(thisRoute);
+        Cursor details = routeDetailViewModel.getRouteDetail(thisRoute);
 
         if(details.moveToFirst()) {
             allDetails = "Company: " + details.getString(1)
@@ -37,7 +38,7 @@ public class RouteDetailActivity extends Activity {
             binding.setAllDetails(allDetails);
         }
 
-		Cursor stops = databaseHelper.getRouteStops(details.getString(3));
+        Cursor stops = routeDetailViewModel.getRouteStops(details.getString(3));
         CursorAdapter listAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1,
                 stops,
