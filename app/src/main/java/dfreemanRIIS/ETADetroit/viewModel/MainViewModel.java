@@ -1,39 +1,25 @@
 package dfreemanRIIS.ETADetroit.viewModel;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
-import android.view.Menu;
 import android.view.MenuItem;
 
+import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.view.MainActivity;
 
-public class MainViewModel extends BaseObservable{
+public class MainViewModel extends BaseObservable {
 
-    private Context context;
-    private MainActivity mainActivity;
-    public boolean isListView;
-
-    public MainViewModel(Context context) {
-        mainActivity = new MainActivity();
-        this.context = context;
-    }
-
-    private void setUpActionBar() {
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return true;
-    }
-
-    private void toggle() {
-        if (isListView) {
-            isListView = false;
+    public static void toggle() {
+        MenuItem item = MainActivity.menu.findItem(R.id.action_toggle);
+        if (MainActivity.isListView) {
+            MainActivity.mStaggeredLayoutManager.setSpanCount(2);
+            item.setIcon(R.drawable.ic_action_list);
+            item.setTitle("Show as list");
+            MainActivity.isListView = false;
         } else {
-            isListView = true;
+            MainActivity.mStaggeredLayoutManager.setSpanCount(1);
+            item.setIcon(R.drawable.ic_action_grid);
+            item.setTitle("Show as grid");
+            MainActivity.isListView = true;
         }
     }
 }
