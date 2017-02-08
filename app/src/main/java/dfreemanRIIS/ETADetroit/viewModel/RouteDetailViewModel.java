@@ -7,7 +7,7 @@ import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
 public class RouteDetailViewModel {
 
-    private Context context;
+    private final Context context;
 
     public RouteDetailViewModel(Context context) {
         this.context = context;
@@ -17,6 +17,7 @@ public class RouteDetailViewModel {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         return databaseHelper.getRouteDetails(thisRoute);
     }
+
     public Cursor getRouteStops(String thisRouteNumber) {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         return databaseHelper.getRouteStops(thisRouteNumber);

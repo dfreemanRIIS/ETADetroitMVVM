@@ -24,7 +24,6 @@ import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
 import dfreemanRIIS.ETADetroit.databinding.ActivityCompanyBinding;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
-import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 import dfreemanRIIS.ETADetroit.viewModel.CompanyViewModel;
 
 public class CompanyActivity extends Activity {
@@ -37,7 +36,7 @@ public class CompanyActivity extends Activity {
     private BusCompany mBusCompany;
     private int defaultColor;
     private Cursor allRoutes;
-    public String allCompanies;
+    private String allCompanies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

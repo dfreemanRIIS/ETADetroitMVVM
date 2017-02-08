@@ -15,7 +15,7 @@ import dfreemanRIIS.ETADetroit.viewModel.RouteDetailViewModel;
 public class RouteDetailActivity extends Activity {
 
     public static final String EXTRA_ROUTE_NAME = "route_name";
-    public String allDetails;
+    private String allDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

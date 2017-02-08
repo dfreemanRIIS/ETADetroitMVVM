@@ -7,7 +7,7 @@ import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
 public class CompanyViewModel {
 
-    private Context context;
+    private final Context context;
 
     public CompanyViewModel(Context context) {
         this.context = context;
