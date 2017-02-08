@@ -38,7 +38,6 @@ public class CompanyViewModel extends Activity {
     private BusCompany mBusCompany;
     private int defaultColor;
     private Cursor allRoutes;
-    private String allCompanies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class CompanyViewModel extends Activity {
         setContentView(R.layout.activity_company);
 
         ActivityCompanyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_company);
-        allCompanies = "TEST";
+        String allCompanies = "TEST";
         binding.setAllCompanies(allCompanies);
 
         ListView mList = (ListView) findViewById(R.id.list);

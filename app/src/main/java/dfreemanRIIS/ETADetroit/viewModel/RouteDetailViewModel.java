@@ -23,14 +23,14 @@ public class RouteDetailViewModel {
     public CursorAdapter getRouteStops(String thisRouteNumber) {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         Cursor stops = databaseHelper.getRouteStops(thisRouteNumber);
-        CursorAdapter cursorAdapter = new SimpleCursorAdapter(context,
+        return new SimpleCursorAdapter(context,
                 android.R.layout.simple_list_item_1,
                 stops,
                 new String[]{"stop_name"},
                 new int[]{android.R.id.text1},
                 0);
         //stops.close();  CAN'T CLOSE THIS ONE
-        return cursorAdapter;
+        //return cursorAdapter;
     }
 
     public String getAllDetailsString(String thisRoute) {

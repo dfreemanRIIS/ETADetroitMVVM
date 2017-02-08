@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
     private final TravelListAdapter.OnItemClickListener onItemClickListener = new TravelListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
-            MainViewModel.travelListAdapterClick(MainActivity.this, v, position);
+            MainViewModel.travelListAdapterClick(MainActivity.this, position);
             ImageView placeImage = (ImageView) v.findViewById(R.id.placeImage);
             LinearLayout placeNameHolder = (LinearLayout) v.findViewById(R.id.placeNameHolder);
             View navigationBar = findViewById(android.R.id.navigationBarBackground);
