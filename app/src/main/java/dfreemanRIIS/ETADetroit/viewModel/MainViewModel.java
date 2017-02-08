@@ -1,9 +1,14 @@
 package dfreemanRIIS.ETADetroit.viewModel;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.MenuItem;
+import android.view.View;
 
 import dfreemanRIIS.ETADetroit.R;
+import dfreemanRIIS.ETADetroit.view.CompanyActivity;
 import dfreemanRIIS.ETADetroit.view.MainActivity;
 
 public class MainViewModel extends BaseObservable {
@@ -21,5 +26,15 @@ public class MainViewModel extends BaseObservable {
             item.setTitle("Show as grid");
             MainActivity.isListView = true;
         }
+    }
+
+    public static void createMain() {
+        MainActivity.isListView = true;
+        MainActivity.mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+    }
+
+    public static void travelListAdapterClick(Context mainActivityContext, View v, int position) {
+        MainActivity.transitionIntent = new Intent(mainActivityContext, CompanyActivity.class);
+        MainActivity.transitionIntent.putExtra(CompanyActivity.EXTRA_PARAM_ID, position);
     }
 }
