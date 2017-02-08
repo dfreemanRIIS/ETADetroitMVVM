@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import dfreemanRIIS.ETADetroit.R;
-import dfreemanRIIS.ETADetroit.view.CompanyActivity;
 import dfreemanRIIS.ETADetroit.view.MainActivity;
 
 public class MainViewModel extends BaseObservable {
@@ -34,7 +33,7 @@ public class MainViewModel extends BaseObservable {
     }
 
     public static void travelListAdapterClick(Context mainActivityContext, View v, int position) {
-        MainActivity.transitionIntent = new Intent(mainActivityContext, CompanyActivity.class);
-        MainActivity.transitionIntent.putExtra(CompanyActivity.EXTRA_PARAM_ID, position);
+        MainActivity.transitionIntent = new Intent(mainActivityContext, CompanyViewModel.class);
+        MainActivity.transitionIntent.putExtra(CompanyViewModel.EXTRA_PARAM_ID, position);
     }
 }

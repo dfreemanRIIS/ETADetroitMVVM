@@ -1,20 +1,119 @@
 package dfreemanRIIS.ETADetroit.viewModel;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v7.graphics.Palette;
+import android.transition.Transition;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.databinding.DataBindingUtil;
 
-import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
+import dfreemanRIIS.ETADetroit.R;
+import dfreemanRIIS.ETADetroit.adapters.TodoCursorAdapter;
+import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
+import dfreemanRIIS.ETADetroit.databinding.ActivityCompanyBinding;
+import dfreemanRIIS.ETADetroit.model.BusCompany;
+import dfreemanRIIS.ETADetroit.model.BusCompanyData;
+import dfreemanRIIS.ETADetroit.view.CompanyActivity;
+import dfreemanRIIS.ETADetroit.view.MainActivity;
+import dfreemanRIIS.ETADetroit.view.RouteDetailActivity;
 
-public class CompanyViewModel {
+public class CompanyViewModel extends Activity {
 
-    private final Context context;
+    public static final String EXTRA_PARAM_ID = "place_id";
+    private ImageView mImageView;
+    private TextView mTitle;
+    private LinearLayout mTitleHolder;
+    private LinearLayout mRevealView;
+    private BusCompany mBusCompany;
+    private int defaultColor;
+    private Cursor allRoutes;
+    private String allCompanies;
 
-    public CompanyViewModel(Context context) {
-        this.context = context;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_company);
+
+        ActivityCompanyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_company);
+        allCompanies = "TEST";
+        binding.setAllCompanies(allCompanies);
+
+        ListView mList = (ListView) findViewById(R.id.list);
+        BusCompanyData busCompanyData = new BusCompanyData(this);
+        mBusCompany = busCompanyData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
+        mImageView = (ImageView) findViewById(R.id.placeImage);
+        mTitle = (TextView) findViewById(R.id.textView);
+        mTitleHolder = (LinearLayout) findViewById(R.id.placeNameHolder);
+        mRevealView = (LinearLayout) findViewById(R.id.llEditTextHolder);
+        defaultColor = getResources().getColor(R.color.primary_dark);
+        mRevealView.setVisibility(View.INVISIBLE);
+
+        CompanyActivity companyActivity = new CompanyActivity(this);
+        allRoutes = companyActivity.getAllRoutes(mBusCompany.name);
+        CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
+
+        mList.setAdapter(listAdapter);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (allRoutes.moveToPosition(position)) {
+                    Intent intent = new Intent(CompanyViewModel.this, RouteDetailActivity.class);
+                    intent.putExtra(RouteDetailActivity.EXTRA_ROUTE_NAME, allRoutes.getString(1));
+                    startActivity(intent);
+                }
+            }
+        });
+
+        loadPlace();
+        windowTransition();
+        getPhoto();
     }
 
-    public Cursor getAllRoutes(String name) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        return databaseHelper.getAllRoutes(name);
+    private void loadPlace() {
+        mTitle.setText(mBusCompany.name);
+        mImageView.setImageResource(mBusCompany.getImageResourceId(this));
+    }
+
+    private void windowTransition() {
+        getWindow().getEnterTransition().addListener(new TransitionAdapter() {
+        @Override
+        public void onTransitionEnd(Transition transition) {
+            getWindow().getEnterTransition().removeListener(this);
+        }
+        });
+    }
+
+    private void getPhoto() {
+        Bitmap photo = BitmapFactory.decodeResource(getResources(), mBusCompany.getImageResourceId(this));
+        colorize(photo);
+    }
+
+    private void colorize(Bitmap photo) {
+        Palette mPalette = Palette.generate(photo);
+        applyPalette(mPalette);
+    }
+
+    private void applyPalette(Palette mPalette) {
+        getWindow().setBackgroundDrawable(new ColorDrawable(mPalette.getDarkMutedColor(defaultColor)));
+        mTitleHolder.setBackgroundColor(mPalette.getMutedColor(defaultColor));
+        mRevealView.setBackgroundColor(mPalette.getLightVibrantColor(defaultColor));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CompanyViewModel.this, MainActivity.class);
+        startActivity(intent);
     }
 }
