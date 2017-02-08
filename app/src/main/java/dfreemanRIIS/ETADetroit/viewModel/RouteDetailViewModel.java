@@ -2,6 +2,8 @@ package dfreemanRIIS.ETADetroit.viewModel;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.CursorAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import dfreemanRIIS.ETADetroit.model.DatabaseHelper;
 
@@ -18,8 +20,14 @@ public class RouteDetailViewModel {
         return databaseHelper.getRouteDetails(thisRoute);
     }
 
-    public Cursor getRouteStops(String thisRouteNumber) {
+    public CursorAdapter getRouteStops(String thisRouteNumber) {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        return databaseHelper.getRouteStops(thisRouteNumber);
+        Cursor stops = databaseHelper.getRouteStops(thisRouteNumber);
+        return new SimpleCursorAdapter(context,
+                android.R.layout.simple_list_item_1,
+                stops,
+                new String[]{"stop_name"},
+                new int[]{android.R.id.text1},
+                0);
     }
 }

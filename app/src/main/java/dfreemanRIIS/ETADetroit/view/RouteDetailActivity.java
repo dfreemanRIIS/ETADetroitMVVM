@@ -38,14 +38,7 @@ public class RouteDetailActivity extends Activity {
             binding.setAllDetails(allDetails);
         }
 
-        Cursor stops = routeDetailViewModel.getRouteStops(details.getString(3));
-        CursorAdapter listAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1,
-                stops,
-                new String[]{"stop_name"},
-                new int[]{android.R.id.text1},
-                0);
-
+        CursorAdapter listAdapter = routeDetailViewModel.getRouteStops(details.getString(3));
         ListView listStops = (ListView) findViewById(R.id.listStops);
         listStops.setAdapter(listAdapter);
     }
