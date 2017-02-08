@@ -30,4 +30,19 @@ public class RouteDetailViewModel {
                 new int[]{android.R.id.text1},
                 0);
     }
+
+    public String getAllDetailsString(String thisRoute) {
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        Cursor details = databaseHelper.getRouteDetails(thisRoute);
+        if(details.moveToFirst()) {
+            String allDetails = "Company: " + details.getString(1)
+                    + "\nRoute name: " + details.getString(2)
+                    + "\nRoute number: " + details.getString(3)
+                    + "\nDirection 1: " + details.getString(4)
+                    + "\nDirection 2: " + details.getString(5)
+                    + "\nDays active: " + details.getString(6);
+            return allDetails;
+        }
+        return null;
+    }
 }
