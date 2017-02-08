@@ -76,6 +76,7 @@ public class CompanyViewModel extends Activity {
             }
         });
 
+        //allRoutes.close();  //Can't do this, cant re-open closed cursor
         loadPlace();
         windowTransition();
         getPhoto();

@@ -29,6 +29,7 @@ public class RouteDetailActivity extends Activity {
 
         details.moveToFirst();
         CursorAdapter listAdapter = routeDetailViewModel.getRouteStops(details.getString(3));
+        details.close();
         ListView listStops = (ListView) findViewById(R.id.listStops);
         listStops.setAdapter(listAdapter);
     }

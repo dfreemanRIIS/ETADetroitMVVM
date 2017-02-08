@@ -20,6 +20,7 @@ public class BusCompanyData {
                 i++;
             } while (companyCursor.moveToNext());
         }
+        companyCursor.close();
     }
 
     public ArrayList<BusCompany> placeList() {

@@ -23,12 +23,14 @@ public class RouteDetailViewModel {
     public CursorAdapter getRouteStops(String thisRouteNumber) {
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         Cursor stops = databaseHelper.getRouteStops(thisRouteNumber);
-        return new SimpleCursorAdapter(context,
+        CursorAdapter cursorAdapter = new SimpleCursorAdapter(context,
                 android.R.layout.simple_list_item_1,
                 stops,
                 new String[]{"stop_name"},
                 new int[]{android.R.id.text1},
                 0);
+        //stops.close();  CAN'T CLOSE THIS ONE
+        return cursorAdapter;
     }
 
     public String getAllDetailsString(String thisRoute) {
@@ -41,8 +43,10 @@ public class RouteDetailViewModel {
                     + "\nDirection 1: " + details.getString(4)
                     + "\nDirection 2: " + details.getString(5)
                     + "\nDays active: " + details.getString(6);
+            details.close();
             return allDetails;
         }
+        details.close();
         return null;
     }
 }

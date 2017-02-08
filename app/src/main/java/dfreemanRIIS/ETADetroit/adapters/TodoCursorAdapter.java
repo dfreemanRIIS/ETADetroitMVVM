@@ -29,6 +29,7 @@ public class TodoCursorAdapter extends CursorAdapter {
 
         int routeNumber = cursor.getInt(cursor.getColumnIndexOrThrow("route_number"));
         String routeName = cursor.getString(cursor.getColumnIndexOrThrow("route_name"));
+        //cursor.close();  Can't close here either, re-open issue
 
         routeNumberView.setText(String.valueOf(routeNumber));
         routeNameView.setText(routeName);
